@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -100,6 +101,7 @@ class ServerBloc extends Bloc<ServerEvent, ServerState> {
     final newDomainNames = domainNames.where(
       (domain) => !state.domainNames.contains(domain),
     );
+    sleep(const Duration(seconds: 3));
     for (final domain in newDomainNames) {
       // create broker, device, alert subscription
       if (!_brokerSubsriptionMap.keys.contains(domain)) {
